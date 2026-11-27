@@ -46,8 +46,8 @@ pipeline {
       withSonarQubeEnv('SonarQube') {
         sh '''
           mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-            -Dsonar.projectKey=springboot-app \
-            -Dsonar.projectName=makram \
+            -Dsonar.projectKey=Devops-Project \
+            -Dsonar.projectName=DevopsProject \
             -Dsonar.host.url=$SONAR_HOST_URL \
             -Dsonar.token=$SONAR_AUTH_TOKEN
         '''
