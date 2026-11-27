@@ -41,14 +41,20 @@ pipeline {
     }
 
     stage('Analyse SonarQube') {
-      steps {
-        dir("${APP_DIR}") {
-          withSonarQubeEnv('SonarQube') {
-            sh 'mvn sonar:sonar -Dsonar.projectKey=devops'
-          }
-        }
+  steps {
+    dir("${APP_DIR}") {
+      withSonarQubeEnv('SonarQube') {
+        sh '''
+          mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+            -Dsonar.projectKey=springboot-app \
+            -Dsonar.projectName=makram \
+            -Dsonar.host.url=$SONAR_HOST_URL \
+            -Dsonar.token=$SONAR_AUTH_TOKEN
+        '''
       }
     }
+  }
+}
 
     stage('Docker Build') {
       steps {
