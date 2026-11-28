@@ -1,10 +1,8 @@
 package tn.esprit.backend.controller;
 
-import tn.esprit.backend.dto.EntrepriseDTO;
-import tn.esprit.backend.dto.EntrepriseMapper;
-
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.backend.dto.EntrepriseDto;
 import tn.esprit.backend.entity.Entreprise;
 import tn.esprit.backend.service.IEntrepriseService;
 
@@ -13,19 +11,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/entreprise")
 @AllArgsConstructor
-@CrossOrigin("*")
 public class EntrepriseController {
 
     IEntrepriseService entrepriseService;
 
     @PostMapping("/add")
-    public EntrepriseDTO addEntreprise(@RequestBody EntrepriseDTO dto) {
-        return EntrepriseMapper.toDto(entrepriseService.addEntreprise(EntrepriseMapper.toEntity(dto)));
+    public Entreprise addEntreprise(@RequestBody EntrepriseDto dto) {
+        return entrepriseService.addEntreprise(dto.toEntity());
     }
 
     @PutMapping("/update")
-    public EntrepriseDTO updateEntreprise(@RequestBody EntrepriseDTO dto) {
-        return EntrepriseMapper.toDto(entrepriseService.updateEntreprise(EntrepriseMapper.toEntity(dto)));
+    public Entreprise updateEntreprise(@RequestBody EntrepriseDto dto) {
+        return entrepriseService.updateEntreprise(dto.toEntity());
     }
 
     @DeleteMapping("/delete/{id}")
