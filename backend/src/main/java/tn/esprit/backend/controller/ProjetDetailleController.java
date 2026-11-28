@@ -2,7 +2,6 @@ package tn.esprit.backend.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.backend.dto.ProjetDetailleDto;
 import tn.esprit.backend.entity.ProjetDetaille;
 import tn.esprit.backend.service.IProjetDetailleService;
 
@@ -11,18 +10,19 @@ import java.util.List;
 @RestController
 @RequestMapping("/projet-detaille")
 @AllArgsConstructor
+@CrossOrigin("*")
 public class ProjetDetailleController {
 
     IProjetDetailleService projetDetailleService;
 
     @PostMapping("/add")
-    public ProjetDetaille addProjetDetaille(@RequestBody ProjetDetailleDto dto) {
-        return projetDetailleService.addProjetDetaille(dto.toEntity());
+    public ProjetDetaille addProjetDetaille(@RequestBody ProjetDetaille projetDetaille) {
+        return projetDetailleService.addProjetDetaille(projetDetaille);
     }
 
     @PutMapping("/update")
-    public ProjetDetaille updateProjetDetaille(@RequestBody ProjetDetailleDto dto) {
-        return projetDetailleService.updateProjetDetaille(dto.toEntity());
+    public ProjetDetaille updateProjetDetaille(@RequestBody ProjetDetaille projetDetaille) {
+        return projetDetailleService.updateProjetDetaille(projetDetaille);
     }
 
     @DeleteMapping("/delete/{id}")

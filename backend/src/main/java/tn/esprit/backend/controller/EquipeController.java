@@ -2,7 +2,6 @@ package tn.esprit.backend.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.backend.dto.EquipeDto;
 import tn.esprit.backend.entity.Equipe;
 import tn.esprit.backend.service.IEquipeService;
 
@@ -11,18 +10,19 @@ import java.util.List;
 @RestController
 @RequestMapping("/equipe")
 @AllArgsConstructor
+@CrossOrigin("*")
 public class EquipeController {
 
     IEquipeService equipeService;
 
     @PostMapping("/add")
-    public Equipe addEquipe(@RequestBody EquipeDto dto) {
-        return equipeService.addEquipe(dto.toEntity());
+    public Equipe addEquipe(@RequestBody Equipe equipe) {
+        return equipeService.addEquipe(equipe);
     }
 
     @PutMapping("/update")
-    public Equipe updateEquipe(@RequestBody EquipeDto dto) {
-        return equipeService.updateEquipe(dto.toEntity());
+    public Equipe updateEquipe(@RequestBody Equipe equipe) {
+        return equipeService.updateEquipe(equipe);
     }
 
     @DeleteMapping("/delete/{id}")
